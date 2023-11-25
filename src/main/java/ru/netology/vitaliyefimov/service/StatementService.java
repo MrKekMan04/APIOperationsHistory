@@ -17,7 +17,7 @@ public class StatementService {
     }
 
     public List<Operation> getCustomerOperations(int customerId) {
-        return storage.get(customerId);
+        return storage.containsKey(customerId) ? storage.getOrDefault(customerId, List.of()) : null;
     }
 
     public Operation getOperation(int clientId, int operationIndex) {
