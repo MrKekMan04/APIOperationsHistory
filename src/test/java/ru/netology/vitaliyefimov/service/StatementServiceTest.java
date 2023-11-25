@@ -6,9 +6,6 @@ import ru.netology.vitaliyefimov.OperationHistoryApiApplicationTest;
 import ru.netology.vitaliyefimov.entity.Currency;
 import ru.netology.vitaliyefimov.entity.Operation;
 
-import java.util.List;
-import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StatementServiceTest extends OperationHistoryApiApplicationTest {
