@@ -3,7 +3,8 @@ package ru.netology.vitaliyefimov.entity;
 public class LoanOperation extends Operation {
     private int loanId;
 
-    public void setLoanId(int loanId) {
+    public LoanOperation(Integer id, Integer sum, Currency currency, String merchant, Integer customerId, int loanId) {
+        super(id, sum, currency, merchant, customerId);
         this.loanId = loanId;
     }
 
@@ -11,8 +12,7 @@ public class LoanOperation extends Operation {
         return loanId;
     }
 
-    public LoanOperation(int id, int sum, Currency currency, String merchant, int loanId) {
-        super(id, sum, currency, merchant);
+    public void setLoanId(int loanId) {
         this.loanId = loanId;
     }
 

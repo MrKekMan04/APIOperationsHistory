@@ -3,7 +3,8 @@ package ru.netology.vitaliyefimov.entity;
 public class CashbackOperation extends Operation {
     private int cashbackAmount;
 
-    public void setCashbackAmount(int cashbackAmount) {
+    public CashbackOperation(Integer id, Integer sum, Currency currency, String merchant, Integer customerId, int cashbackAmount) {
+        super(id, sum, currency, merchant, customerId);
         this.cashbackAmount = cashbackAmount;
     }
 
@@ -11,8 +12,7 @@ public class CashbackOperation extends Operation {
         return cashbackAmount;
     }
 
-    public CashbackOperation(int id, int sum, Currency currency, String merchant, int cashbackAmount) {
-        super(id, sum, currency, merchant);
+    public void setCashbackAmount(int cashbackAmount) {
         this.cashbackAmount = cashbackAmount;
     }
 
