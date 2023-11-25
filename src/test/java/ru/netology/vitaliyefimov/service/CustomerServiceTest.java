@@ -1,24 +1,32 @@
 package ru.netology.vitaliyefimov.service;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import ru.netology.vitaliyefimov.OperationHistoryApiApplicationTest;
 import ru.netology.vitaliyefimov.entity.Customer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CustomerServiceTest {
+public class CustomerServiceTest extends OperationHistoryApiApplicationTest {
+    @Autowired
+    private CustomerService customerService;
+
     @Test
     public void assertThatCustomerServiceWorksRight() {
-        StorageService<Customer> customerStorageService = new StorageService<>();
-        CustomerService customerService = new CustomerService(customerStorageService);
         int id = 1;
         String name = "Peter";
-        Customer peter = new Customer(id, name);
+        String password = "pass";
+        Customer peter = new Customer(id, name, password);
+
+        assertEquals(new Customer(1, "Spring", "pass"), customerService.getCustomer(0));
+        assertEquals(new Customer(2, "Boot", "pass"), customerService.getCustomer(1));
 
         customerService.addCustomer(peter);
-        Customer customer = customerService.getCustomer(0);
+        Customer customer = customerService.getCustomer(2);
 
         assertEquals(peter, customer);
-        assertEquals(id, customer.getID());
+        assertEquals(id, customer.getId());
         assertEquals(name, customer.getName());
+        assertEquals(password, customer.getPassword());
     }
 }
