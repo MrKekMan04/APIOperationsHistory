@@ -1,25 +1,31 @@
 package ru.netology.vitaliyefimov.service;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 import ru.netology.vitaliyefimov.entity.Customer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class CustomerService {
-    private final StorageService<Customer> service;
+    private final List<Customer> storage = new ArrayList<>();
 
-    public CustomerService(StorageService<Customer> service) {
-        this.service = service;
+    public List<Customer> getCustomers() {
+        return storage;
     }
 
     public Customer getCustomer(int index) {
-        return service.getElement(index);
+        return storage.get(index);
     }
 
     public void addCustomer(Customer customer) {
-        service.addElement(customer);
+        storage.add(customer);
     }
 
-    public int customersCount() {
-        return service.size();
+    @PostConstruct
+    public void initStorage() {
+        addCustomer(new Customer(1, "Spring", "pass"));
+        addCustomer(new Customer(2, "Boot", "pass"));
     }
 }
