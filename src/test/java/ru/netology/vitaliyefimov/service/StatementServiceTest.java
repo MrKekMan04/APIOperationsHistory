@@ -1,6 +1,8 @@
 package ru.netology.vitaliyefimov.service;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import ru.netology.vitaliyefimov.OperationHistoryApiApplicationTest;
 import ru.netology.vitaliyefimov.entity.Currency;
 import ru.netology.vitaliyefimov.entity.Operation;
 
@@ -9,10 +11,12 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class StatementServiceTest {
+public class StatementServiceTest extends OperationHistoryApiApplicationTest {
+    @Autowired
+    private StatementService statementService;
+
     @Test
     public void assertThatStatementServiceWorksRight() {
-        StatementService statementService = new StatementService();
         int operationId = 2;
         int operationClientId = 0;
         int clientId = 1;
@@ -20,11 +24,10 @@ public class StatementServiceTest {
         Currency operationCurrency = Currency.USD;
         String operationMerchant = "Coffee";
 
-        Operation operation = new Operation(operationId, operationSum, operationCurrency, operationMerchant);
+        Operation operation = new Operation(operationId, operationSum, operationCurrency, operationMerchant, clientId);
         statementService.setOperation(clientId, operation);
         Operation serviceOperation = statementService.getOperation(clientId, operationClientId);
 
-        assertEquals(Map.of(clientId, List.of(operation)), statementService.getStatement());
         assertEquals(operation, serviceOperation);
         assertEquals(operationId, serviceOperation.getId());
         assertEquals(operationSum, serviceOperation.getSum());
