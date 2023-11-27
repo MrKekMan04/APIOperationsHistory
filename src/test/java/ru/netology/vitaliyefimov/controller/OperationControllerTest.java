@@ -31,8 +31,10 @@ public class OperationControllerTest extends OperationHistoryApiApplicationTest 
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
 
         mvc.perform(MockMvcRequestBuilders.post("/api/operations")
-                .contentType("application/json")
-                .content(mapper.writeValueAsString(operation)));
+                        .contentType("application/json")
+                        .content(mapper.writeValueAsString(operation)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(mapper.writeValueAsString(operation)));
 
         Thread.sleep(2L * properties.getSleepMilliSeconds());
 
