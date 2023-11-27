@@ -44,7 +44,7 @@ public class OperationControllerTest extends OperationHistoryApiApplicationTest 
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(mapper.writeValueAsString(operation)));
 
-        mvc.perform(MockMvcRequestBuilders.delete("/api/operaions/%d".formatted(operation.getId())))
+        mvc.perform(MockMvcRequestBuilders.delete("/api/operations/%d".formatted(operation.getId())))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 }
